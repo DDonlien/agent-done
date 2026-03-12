@@ -9,27 +9,27 @@
     {
       host: /(^|\.)chatgpt\.com$|(^|\.)chat\.openai\.com$/,
       startSelectors: ['button[data-testid="send-button"]', 'form button[aria-label*="Send"]'],
-      loadingSelectors: ['button[data-testid="stop-button"]']
+      loadingSelectors: ['button[data-testid="stop-button"]', '.result-streaming']
     },
     {
       host: /(^|\.)claude\.ai$/,
       startSelectors: ['button[aria-label*="Send Message"]', 'button[data-testid="chat-input-send-button"]'],
-      loadingSelectors: ['button[aria-label*="Stop"]']
+      loadingSelectors: ['button[aria-label*="Stop"]', '.streaming']
     },
     {
       host: /(^|\.)gemini\.google\.com$/,
       startSelectors: ['button[aria-label*="Send"]'],
-      loadingSelectors: ['button[aria-label*="Stop"]']
+      loadingSelectors: ['button[aria-label*="Stop"]', 'div[class*="generating"]']
     },
     {
       host: /(^|\.)perplexity\.ai$|(^|\.)www\.perplexity\.ai$/,
       startSelectors: ['button[aria-label*="Submit"]', 'button[aria-label*="Send"]'],
-      loadingSelectors: ['button[aria-label*="Stop"]']
+      loadingSelectors: ['button[aria-label*="Stop"]', '.is-loading']
     },
     {
       host: /(^|\.)poe\.com$|(^|\.)chat\.deepseek\.com$|(^|\.)doubao\.com$|(^|\.)yuanbao\.tencent\.com$|(^|\.)kimi\.moonshot\.cn$/,
       startSelectors: ['button[type="submit"]', 'button[aria-label*="发送"]', 'button[aria-label*="Send"]'],
-      loadingSelectors: ['button[aria-label*="停止"]', 'button[aria-label*="Stop"]']
+      loadingSelectors: ['button[aria-label*="停止"]', 'button[aria-label*="Stop"]', '[aria-busy="true"]']
     }
   ];
 
@@ -137,17 +137,17 @@
   }
 
   function drawSpinner(ctx, tick) {
-    const cx = 24;
-    const cy = 8;
-    const radius = 5;
+    const cx = 16;
+    const cy = 16;
+    const radius = 10;
     const segments = 12;
     for (let i = 0; i < segments; i += 1) {
       const angle = ((Math.PI * 2) / segments) * i + tick * 0.35;
       const alpha = (i + 1) / segments;
       ctx.strokeStyle = `rgba(37, 99, 235, ${alpha})`;
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.moveTo(cx + Math.cos(angle) * (radius - 2), cy + Math.sin(angle) * (radius - 2));
+      ctx.moveTo(cx + Math.cos(angle) * (radius - 3), cy + Math.sin(angle) * (radius - 3));
       ctx.lineTo(cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius);
       ctx.stroke();
     }
@@ -155,17 +155,17 @@
 
   function drawCheck(ctx) {
     ctx.beginPath();
-    ctx.arc(24, 8, 7, 0, Math.PI * 2);
+    ctx.arc(16, 16, 12, 0, Math.PI * 2);
     ctx.fillStyle = 'rgba(22, 163, 74, 0.95)';
     ctx.fill();
 
     ctx.strokeStyle = '#fff';
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 3;
     ctx.lineCap = 'round';
     ctx.beginPath();
-    ctx.moveTo(21, 8);
-    ctx.lineTo(23.5, 10.5);
-    ctx.lineTo(27.5, 6.5);
+    ctx.moveTo(11, 16);
+    ctx.lineTo(15, 20);
+    ctx.lineTo(22, 12);
     ctx.stroke();
   }
 
@@ -217,7 +217,7 @@
       if (!isLikelyGenerating()) {
         setState(STATE.DONE);
       }
-    }, 700);
+    }, 1500);
   }
 
   function setupEventDetection() {
