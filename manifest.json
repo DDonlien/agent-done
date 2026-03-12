@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "AI Tab Progress Indicator",
+  "version": "0.1.0",
+  "description": "Detect generative AI tabs and overlay favicon status for running/completed generations.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://chat.openai.com/*",
+    "https://chatgpt.com/*",
+    "https://claude.ai/*",
+    "https://gemini.google.com/*",
+    "https://www.perplexity.ai/*",
+    "https://poe.com/*",
+    "https://chat.deepseek.com/*",
+    "https://www.doubao.com/*",
+    "https://yuanbao.tencent.com/*",
+    "https://kimi.moonshot.cn/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chat.openai.com/*",
+        "https://chatgpt.com/*",
+        "https://claude.ai/*",
+        "https://gemini.google.com/*",
+        "https://www.perplexity.ai/*",
+        "https://poe.com/*",
+        "https://chat.deepseek.com/*",
+        "https://www.doubao.com/*",
+        "https://yuanbao.tencent.com/*",
+        "https://kimi.moonshot.cn/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
