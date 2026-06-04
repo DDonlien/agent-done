@@ -1,8 +1,11 @@
 {
   "manifest_version": 3,
   "name": "AI Tab Progress Indicator",
-  "version": "0.1.0",
+  "version": "0.1.4",
   "description": "Detect generative AI tabs and overlay favicon status for running/completed generations.",
+  "action": {
+    "default_popup": "popup.html"
+  },
   "permissions": [
     "storage"
   ],

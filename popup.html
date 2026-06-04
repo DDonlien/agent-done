@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 250px;
+      padding: 12px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 13px;
+    }
+    h2 {
+      margin: 0 0 10px 0;
+      font-size: 15px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
+    .status-box {
+      background: #f3f4f6;
+      border-radius: 4px;
+      padding: 8px;
+      margin-bottom: 12px;
+    }
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .status-label {
+      color: #6b7280;
+    }
+    .status-value {
+      font-weight: 600;
+    }
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    button {
+      padding: 6px 12px;
+      border: 1px solid #d1d5db;
+      background: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.2s;
+    }
+    button:hover {
+      background: #f9fafb;
+      border-color: #9ca3af;
+    }
+    button.primary {
+      background: #2563eb;
+      color: #fff;
+      border: none;
+    }
+    button.primary:hover {
+      background: #1d4ed8;
+    }
+    button.success {
+      background: #16a34a;
+      color: #fff;
+      border: none;
+    }
+    button.success:hover {
+      background: #15803d;
+    }
+    .error-msg {
+      color: #dc2626;
+      margin-top: 8px;
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+  <h2>AI Tab Debugger</h2>
+  
+  <div class="status-box" id="status-box">
+    <div class="status-row">
+      <span class="status-label">State:</span>
+      <span class="status-value" id="current-state">Unknown</span>
+    </div>
+    <div class="status-row">
+      <span class="status-label">Site Match:</span>
+      <span class="status-value" id="site-match">No</span>
+    </div>
+    <div class="status-row">
+      <span class="status-label">Generating:</span>
+      <span class="status-value" id="is-generating">False</span>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button id="refresh-btn">🔄 Refresh Status</button>
+    <button class="primary" id="force-loading">Force LOADING (Spinner)</button>
+    <button class="success" id="force-done">Force DONE (Check)</button>
+    <button id="force-idle">Reset to IDLE</button>
+  </div>
+
+  <div id="error-msg" class="error-msg"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
